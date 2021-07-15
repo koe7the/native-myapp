@@ -18,39 +18,7 @@ import {
   restaurantData,
 } from './dummyData';
 
-import {COLORS, images, SIZES, FONTS, icons} from '_constants';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: COLORS.white,
-    marginTop: '2%',
-    paddingBottom: '4%',
-  },
-  shadow: {
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 1,
-  },
-  header: {
-    flexDirection: 'row',
-    height: 50,
-    alignItems: 'center',
-  },
-  header_touchable_opacity: {
-    width: 50,
-    paddingLeft: SIZES.padding * 2,
-  },
-  header_image: {
-    width: 30,
-    height: 30,
-  },
-});
+import {COLORS, SIZES, FONTS, icons} from '_constants';
 
 export default function Home({navigation}) {
   const [categories, setCategories] = useState(categoryData);
@@ -85,21 +53,26 @@ export default function Home({navigation}) {
         }}>
         <View
           style={{
-            width: '70%',
-            height: '100%',
-            backgroundColor: COLORS.lightGray3,
+            flex: 1,
             alignItems: 'center',
             justifyContent: 'center',
-            borderRadius: SIZES.radius,
           }}>
-          <Text style={{...FONTS.h3}}>{currentLocation.streetName}</Text>
+          <Text
+            style={{
+              ...FONTS.h3,
+              backgroundColor: COLORS.lightGray3,
+              borderRadius: SIZES.radius,
+              padding: SIZES.padding * 1.2,
+              paddingHorizontal: SIZES.padding * 5,
+            }}>
+            {currentLocation.streetName}
+          </Text>
         </View>
       </View>
       <TouchableOpacity
         style={{
           width: 50,
-          paddingRight: SIZES.padding * 2,
-          justifyContent: 'center',
+          alignItems: 'flex-end',
         }}>
         <Image
           source={icons.basket}
@@ -303,3 +276,37 @@ export default function Home({navigation}) {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.white,
+    marginTop: '2%',
+    paddingBottom: '4%',
+  },
+  shadow: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 1,
+  },
+  header: {
+    height: '10%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingTop: SIZES.padding * 2,
+    paddingHorizontal: SIZES.padding * 2,
+    justifyContent: 'space-around',
+  },
+  header_touchable_opacity: {
+    width: 50,
+  },
+  header_image: {
+    width: 30,
+    height: 30,
+  },
+});

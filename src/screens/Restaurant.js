@@ -27,48 +27,135 @@ export default function Restaurant({route, navigation}) {
       <View
         style={{
           flexDirection: 'row',
-          paddingLeft: SIZES.padding * 2,
           paddingTop: SIZES.padding * 2,
+          paddingHorizontal: SIZES.padding * 2,
+          justifyContent: 'space-around',
         }}>
         <TouchableOpacity
           style={{
             width: 50,
             justifyContent: 'center',
-            backgroundColor: COLORS.lightGray4,
             paddingLeft: SIZES.padding,
             paddingRight: SIZES.padding,
             paddingTop: SIZES.padding * 2,
             paddingBottom: SIZES.padding * 2,
-
-            borderRadius: SIZES.radius,
           }}
           onPress={() => navigation.goBack()}>
           <Image
             source={icons.back}
             resizeMode="contain"
-            style={{width: 30, height: 30}}
+            style={{width: 25, height: 25}}
           />
         </TouchableOpacity>
 
         <View
           style={{
-            backgroundColor: 'red',
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
           }}>
           <Text
-            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            restuasjdsah
+            style={{
+              ...FONTS.h3,
+              backgroundColor: COLORS.lightGray3,
+              borderRadius: SIZES.radius,
+              padding: SIZES.padding * 1.2,
+              paddingHorizontal: SIZES.padding * 5,
+            }}>
+            {restaurant?.name}
           </Text>
         </View>
+
+        <TouchableOpacity
+          style={{
+            justifyContent: 'center',
+            paddingLeft: SIZES.padding,
+            paddingRight: SIZES.padding * 2,
+            paddingTop: SIZES.padding * 2,
+            paddingBottom: SIZES.padding * 2,
+          }}>
+          <Image
+            source={icons.list}
+            resizeMode="contain"
+            style={{width: 25, height: 25}}
+          />
+        </TouchableOpacity>
       </View>
     );
   };
 
-  return <SafeAreaView style={styles.container}>{renderHeader()}</SafeAreaView>;
+  const renderFoodInfo = () => {
+    return (
+      <Animated.ScrollView
+        horizontal
+        pagingEnabled
+        scrollEventThrottle={16}
+        snapToAlignment="center"
+        showsHorizontalScrollIndicator={false}
+        style={{marginVertical: 25}}>
+        {restaurant?.menu.map((item, index) => (
+          <View style={{alignItems: 'center'}} key={`menu-${index}`}>
+            <View style={{height: SIZES.height * 0.35}}>
+              {/* food image */}
+              <Image
+                source={item?.photo}
+                resizeMode="cover"
+                style={{
+                  width: SIZES.width,
+                  height: '100%',
+                }}
+              />
+              <View
+                style={{
+                  position: 'absolute',
+                  bottom: -20,
+                  width: SIZES.width,
+                  height: 50,
+                  flexDirection: 'row',
+                  justifyContent: 'space-around',
+                  alignItems: 'center',
+                  backgroundColor: COLORS.white,
+                  width: '45%',
+                  alignSelf: 'center',
+                  borderRadius: SIZES.radius,
+                  ...styles.shadow,
+                }}>
+                <TouchableOpacity>
+                  <Text style={{...FONTS.body1}}>-</Text>
+                </TouchableOpacity>
+                <Text style={{...FONTS.body2}}>0</Text>
+                <TouchableOpacity>
+                  <Text style={{...FONTS.body1}}>+</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        ))}
+      </Animated.ScrollView>
+    );
+  };
+
+  return (
+    <SafeAreaView style={styles.container}>
+      {renderHeader()}
+      {renderFoodInfo()}
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.white,
+  },
+  shadow: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 1,
   },
 });
