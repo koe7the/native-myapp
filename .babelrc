@@ -13,7 +13,8 @@
           "_molecules": "./src/components/molecules",
           "_organisms": "./src/components/organisms",
           "_navigations": "./src/navigations",
-          "_scenes": "./src/scenes"
+          "_screens": "./src/screens",
+          "_constants": "./src/constants"
         }
       }
     ]
