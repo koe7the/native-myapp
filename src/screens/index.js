@@ -1,9 +1,6 @@
-import Home from './Home'
-import Restaurant from './Restaurant'
-import OrderDelivery from './OrderDelivery'
+import Onboarding from './Onboarding';
+import Home from './Home';
+import Details from './Details';
+import About from './About';
 
-export {
-  Home,
-  Restaurant,
-  OrderDelivery
-}
+export {Onboarding, About, Details, Home};
